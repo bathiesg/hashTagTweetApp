@@ -1,3 +1,9 @@
+:root {
+  --black: #14171A;
+  --blue: #1DA1F2;
+  --dark-grey: #657786;
+  --extra-light: #F5F8FA;
+}
 .container {
     display: flex;
     flex-direction: column;
@@ -6,11 +12,11 @@
   }
 
   .placeholder {
-    color: #ccc;
+    color: var(--extra-light);
 }
 .placeholder::before {
       content: 'Write your tweet...';
-
+      color: var(--dark-grey);
   }
   
   #tweetInput {
@@ -21,7 +27,8 @@
     background: #eee;
     border-radius: 5px;
     margin: 16px 0;
-    caret-color: #000;
+    color: var(--black);
+    caret-color: var(--blue);
   }
   
   #suggestions {
@@ -39,10 +46,10 @@
   }
   
   .hashtag {
-    color: #00acee;
+    color: var(--blue);
   }
   
   .new-hashtag {
-    color: green;
+    color: var(--dark-grey);
   }
   
