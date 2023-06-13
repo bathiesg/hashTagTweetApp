@@ -35,80 +35,42 @@ const existingHashtags = [
 
 const tweetInput = document.getElementById('tweetInput');
 const suggestionsContainer = document.getElementById('suggestions');
-// const hashtagRegex = /#\w+/gm;
 const hashtagRegex = /#[a-zA-Z0-9]{1,}/gm;
 
 
 function togglePLaceholderClass() {
-    if (tweetInput.textContent.trim() === '') {
-      tweetInput.classList.add('placeholder');
-    } else {
-      tweetInput.classList.remove('placeholder');
-    }
+  if (tweetInput.textContent.trim() === '') {
+    tweetInput.classList.add('placeholder');
+  } else {
+    tweetInput.classList.remove('placeholder');
   }
+}
 
-  function handleKeyUp(event) {
-    const { key } = event;
+  function handleKeyUp(event) {    
     const tweet = tweetInput.textContent;
     const cursorPosition = tweetInput.selectionStart;
     const prefix = tweet.substring(0, cursorPosition);
-    const suffix = tweet.substring(cursorPosition);
-    const lastHashSignIndex = prefix.lastIndexOf('#');
     const lastChar = tweetInput.textContent.slice(-1)[0]
-    const lastHash = tweet.substring(lastHashSignIndex + 1, cursorPosition);
   
     const hasMatches = hashtagRegex.test(prefix);
-    console.log('tweetInput.lastChild', tweetInput.textContent.slice(-1)[0], typeof tweetInput);
-
-    console.log('anShowSuggestions(prefix)', hasMatches, canShowSuggestions(prefix));
   
+
     if (lastChar === '#' && canShowSuggestions(prefix)) {
       showSuggestions(existingHashtags);
-      console.log('begin with #');
     } else if (hasMatches) {
       const lastHashtag = prefix.match(hashtagRegex).slice(-1)[0];
-      console.log('matched',lastHashtag);
       const matchedHashtags = getMatchedHashtags(lastHashtag.substring(1));
-      console.log('lastHashtag, matchedHashtags, lastHash', lastHashtag, matchedHashtags, lastHash);
+      console.log('lastHashtag, matchedHashtags', lastHashtag, matchedHashtags);
       if (matchedHashtags.length > 0) {
         showSuggestions(matchedHashtags);
       } else {
-        
-        insertSuggestion(lastHashtag.substring(1))
-        // hideSuggestions();
+        showSuggestions(Array(lastHashtag.substring(1)));        
       }
     } else {
       hideSuggestions();
     }
   }
-  
-  function inserNewTag(tag){
-    const existingTags = getMatchedHashtags(tag);
-    console.log('existingTags', existingTags);
-    const hashtagElement = document.createElement('span');
-    hashtagElement.textContent = '#' + tag;
 
-    if (existingTags.length > 0) {
-      hashtagElement.classList.add('hashtag');
-    } else {
-      hashtagElement.classList.add('new-hashtag');
-    }
-
-    return hashtagElement
-  }
-
-
-// function getHashtags(tweet) {
-//   const regex = /(?:^|\s)(?:#)([a-zA-Z\d]+)/gm;
-//   const matches = [];
-//   let match;
-
-//   while ((match = regex.exec(tweet)) !== null) {
-//     matches.push(match[1]);
-//   }
-
-//   return matches;
-// }
 
 function getMatchedHashtags(hashtags) {
   return existingHashtags.filter((tag) => tag.startsWith(hashtags));
@@ -117,6 +79,7 @@ function getMatchedHashtags(hashtags) {
 function showSuggestions(hashtags) {
   suggestionsContainer.style.display = 'block';
   suggestionsContainer.innerHTML   = '';
+  // const matchedHashtags = getMatchedHashtags(hashtag);
 
   hashtags.forEach((tag) => {
     const suggestion = document.createElement('div');
@@ -137,26 +100,21 @@ function insertSuggestion(tag) {
     const currentTweet = tweetInput.innerHTML;
     let content = currentTweet.substring(0, currentTweet.lastIndexOf('#'))
     const hashClass = existingHashtags.find(currentTag => currentTag === tag) ? 'hashtag': 'new-hashtag'
-    // const hashtagElement = document.createElement('span');
-    // hashtagElement.textContent = '#' + tag;
-    // hashtagElement.classList.add(hashClass);
-    content += `<span class="${hashClass}">#${tag}</span>`
-    
+    content += `<span class="${hashClass}">#${tag}</span>`    
     tweetInput.innerHTML = content;
-    // tweetInput.appendChild(document.createTextNode(' '));
     moveCursorToEnd2(tweetInput)
-    hideSuggestions();
     tweetInput.focus();
+    hideSuggestions();
   }
 
   
   function moveCursorToEnd(position) {
-      const selection = window.getSelection();
-      const range = document.createRange();
-      const lastChild = tweetInput.lastChild;
-      
-      range.setStart(lastChild, position);
-      range.setEnd(lastChild, position);
+    const selection = window.getSelection();
+    const range = document.createRange();
+    const lastChild = tweetInput.lastChild;
+    
+    range.setStart(lastChild, position);
+    range.setEnd(lastChild, position);
       
     selection.removeAllRanges();
     selection.addRange(range);
@@ -164,12 +122,11 @@ function insertSuggestion(tag) {
   }
   
   function canShowSuggestions(str) {
-    const lastHashSignIndex = str.lastIndexOf('#');
-    // return lastHashSignIndex === 0 || str.substring(lastHashSignIndex - 1 , lastHashSignIndex) === ' '
-    if (lastHashSignIndex === 0) {
+    const lastHashIndex = str.lastIndexOf('#');
+    if (lastHashIndex === 0) {
       return true;
       
-    } else if(str.substring(lastHashSignIndex - 1 , lastHashSignIndex) === ' ') {
+    } else if(str.substring(lastHashIndex - 1 , lastHashIndex) === ' ') {
       return true
     } else {
         return false
@@ -186,10 +143,9 @@ function insertSuggestion(tag) {
     selection.addRange(range);
     element.focus();
   }
-  tweetInput.addEventListener('input', togglePLaceholderClass);
-  
- 
-  togglePLaceholderClass();
-  
-  
+
+
+  //Main
+  tweetInput.addEventListener('input', togglePLaceholderClass); 
+  togglePLaceholderClass();  
   tweetInput.addEventListener('keyup', handleKeyUp);
