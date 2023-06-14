@@ -67,6 +67,7 @@ function fillPublishedTweets() {
   tweetDiv.innerHTML = content;
   tweetDestination.appendChild(tweetDiv)
   tweetInput.innerHTML = ''
+  togglePLaceholderClass();
 }
 
 function handleKeyUp(event) {  
