@@ -98,7 +98,7 @@ function handleKeyUp(event) {
 }
 
 function getMatchedHashtags(hashtags) {
-  return existingHashtags.filter((tag) => tag.startsWith(hashtags));
+  return existingHashtags.filter((tag) => tag.toLowerCase().startsWith(hashtags.toLowerCase()));
 }
 
 function showSuggestions(hashtags) {
