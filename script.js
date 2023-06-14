@@ -121,7 +121,7 @@ function insertSuggestion(tag) {
   const currentTweet = tweetInput.innerHTML;
   let content = currentTweet.substring(0, currentTweet.lastIndexOf('#'))
   const hashClass = existingHashtags.find(currentTag => currentTag === tag) ? 'hashtag' : 'new-hashtag'
-  content += `<span class="${hashClass}">#${tag}</span> &nbsp;`
+  content += `<span class="${hashClass}">#${tag}</span>&nbsp;`
   tweetInput.innerHTML = content;
   moveCursorToEnd(tweetInput)
   hideSuggestions();
