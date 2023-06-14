@@ -2,15 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tweet App</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
+    <h1>Tweet #tag funtion</h1>
+    <div class="info">
+      <p><strong>Guide!</strong> <br> Start writing your tweet, and when you type the # character, a dropdown will open with all the existing tweets, and the more you write, the more precise the auto-suggestion becomes. As soon as you find your tweet, click on it and it will be included. 
+        The new tweets are grey while the existing ones are blue.</p>
+    </div>
     <div id="tweetInput" class="placeholder" contenteditable="true"></div>
     <div id="suggestions"></div>
   </div>
-
-  <script src="script.js"></script>
 </body>
+
+<script src="script.js"></script>
 </html>

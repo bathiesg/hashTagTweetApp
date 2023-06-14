@@ -98,31 +98,20 @@ function insertSuggestion(tag) {
   const currentTweet = tweetInput.innerHTML;
   let content = currentTweet.substring(0, currentTweet.lastIndexOf('#'))
   const hashClass = existingHashtags.find(currentTag => currentTag === tag) ? 'hashtag' : 'new-hashtag'
-  content += `<span class="${hashClass}">#${tag} &nbsp;</span>`
+  content += `<span class="${hashClass}">#${tag}</span> &nbsp;`
   tweetInput.innerHTML = content;
   moveCursorToEnd(tweetInput)
   hideSuggestions();
 }
 
 
-function moveCursorToEnd(element) {
-  const range = document.createRange();
-  const selection = window.getSelection();
-  range.selectNodeContents(element);
 
-  if (element.lastChild) {
-      range.setStartAfter(element.lastChild);
-  } else {
-      range.setStart(element, 0);
-  } 
-  
-  range.collapse(true);
-  selection.removeAllRanges();
-  selection.addRange(range);
-  element.focus();
+function moveCursorToEnd(element) {
+  element.focus()
+  window.getSelection().selectAllChildren(element)
+  window.getSelection().collapseToEnd()
 }
 
-  
 function canShowSuggestions(str) {
   const lastHashIndex = str.lastIndexOf('#');
   if (lastHashIndex === 0) {

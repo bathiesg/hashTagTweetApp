@@ -2,13 +2,17 @@
   --black: #14171A;
   --blue: #1DA1F2;
   --dark-grey: #657786;
-  --extra-light: #F5F8FA;
+  --light-grey:  #AAB8C2;
+  --light-blue: #b3d4fc;
+  --extra-light: #F5F8FA; 
 }
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 50px;
+    width: 95%;
+    margin: auto;
   }
 
   .placeholder {
@@ -18,9 +22,19 @@
       content: 'Write your tweet...';
       color: var(--dark-grey);
   }
+
+  .info {
+    font-size: 18px;
+    letter-spacing: .1px;
+    line-height: 24px;
+    margin-bottom: 15px;
+    padding: 4px 12px;
+    background-color: var(--light-blue);
+    border-left: 6px solid var(--blue);
+  }
   
   #tweetInput {
-    width: 300px;
+    width: 95%;
     height: 100px;
     padding: 10px;
     font-size: 16px;
@@ -29,6 +43,7 @@
     margin: 16px 0;
     color: var(--black);
     caret-color: var(--blue);
+    border: 1px solid var(--light-grey);
   }
   
   #suggestions {
@@ -53,3 +68,28 @@
     color: var(--dark-grey);
   }
   
+
+  @media only screen and (min-width: 600px) {
+    .container {
+      width: 70%;
+    }
+  } 
+
+  @media only screen and (min-width: 768) {
+    .container {
+      width: 75%;
+    }
+  } 
+
+  @media only screen and (min-width: 992) {
+    .container {
+      width: 80%;
+    }
+  } 
+
+
+  @media only screen and (min-width: 1200px) {
+    .container {
+      width: 85%;
+    }
+  } 
