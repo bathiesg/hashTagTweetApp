@@ -20,7 +20,7 @@ body {
   align-items: center;
 }
 
-.container:has(#tweetInput) {
+.container.tweet-input {
   position: relative;
 }
 
