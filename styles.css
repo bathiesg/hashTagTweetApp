@@ -2,94 +2,154 @@
   --black: #14171A;
   --blue: #1DA1F2;
   --dark-grey: #657786;
-  --light-grey:  #AAB8C2;
+  --light-grey: #AAB8C2;
   --light-blue: #b3d4fc;
-  --extra-light: #F5F8FA; 
+  --extra-light: #F5F8FA;
 }
+
+body {
+  font-family: "TwitterChirp", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin-top: 50px;
+  width: 95%;
+  margin: auto;
+}
+
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 50px;
-    width: 95%;
-    margin: auto;
-  }
-
-  .placeholder {
-    color: var(--extra-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.container:has(#tweetInput) {
+  position: relative;
+}
+
 .placeholder::before {
-      content: 'Write your tweet...';
-      color: var(--dark-grey);
-  }
+  content: 'Write your tweet...';
+  color: var(--dark-grey);
+}
 
-  .info {
-    font-size: 18px;
-    letter-spacing: .1px;
-    line-height: 24px;
-    margin-bottom: 15px;
-    padding: 4px 12px;
-    background-color: var(--light-blue);
-    border-left: 6px solid var(--blue);
-  }
-  
-  #tweetInput {
-    width: 95%;
-    height: 100px;
-    padding: 10px;
-    font-size: 16px;
-    background: #eee;
-    border-radius: 5px;
-    margin: 16px 0;
-    color: var(--black);
-    caret-color: var(--blue);
-    border: 1px solid var(--light-grey);
-  }
-  
-  #suggestions {
-    display: none;
-    width: 300px;
-    max-height: 150px;
-    overflow-y: auto;
-    padding: 10px;
-    border: 1px solid #ccc;
-  }
-  
-  .suggestion {
-    padding: 5px;
-    cursor: pointer;
-  }
-  
-  .hashtag {
-    color: var(--blue);
-  }
-  
-  .new-hashtag {
-    color: var(--dark-grey);
-  }
-  
+.info {
+  font-size: 18px;
+  letter-spacing: .1px;
+  line-height: 24px;
+  margin-bottom: 15px;
+  padding: 4px 12px;
+  background-color: var(--light-blue);
+  border-left: 6px solid var(--blue);
+}
 
-  @media only screen and (min-width: 600px) {
-    .container {
-      width: 70%;
-    }
-  } 
+#tweetInput {
+  width: 95%;
+  height: 100px;
+  padding: 10px;
+  font-size: 16px;
+  background: #eee;
+  border-radius: 5px;
+  margin: 16px 0 8px;
+  color: var(--black);
+  caret-color: var(--blue);
+  border: 1px solid var(--light-grey);
+}
 
-  @media only screen and (min-width: 768) {
-    .container {
-      width: 75%;
-    }
-  } 
+#suggestions {
+  display: none;
+  position: absolute;
+  top: 80%;
+  left: 5px;
+  background: white;
+  width: 50%;
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid var(--light-grey);
+}
 
-  @media only screen and (min-width: 992) {
-    .container {
-      width: 80%;
-    }
-  } 
+.suggestion {
+  padding: 5px;
+  cursor: pointer;
+  margin-block: 5px;
+}
+
+.suggestion:nth-child(even) {
+  background: var(--extra-light)
+}
+
+.hashtag {
+  color: var(--blue);
+}
+
+.new-hashtag {
+  color: var(--dark-grey);
+}
 
 
-  @media only screen and (min-width: 1200px) {
-    .container {
-      width: 85%;
-    }
-  } 
+.container:has(#tweet-destination) {
+  margin-top: 20px;
+}
+
+#tweet-destination {
+  width: 100%;
+  border: 1px solid var(--light-grey);
+
+}
+
+.no-published-tweet::before {
+  content: 'no tweet published';
+  color: var(--dark-grey);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+.tweet-item {
+  background-color: var(--extra-light);
+  border-radius: 5px;
+  padding: 5px 15px;
+  margin: 10px;
+}
+
+.tweet-item:odd {
+  background-color: var(--light-grey);
+}
+
+#push-tweet {
+  margin-left: auto;
+  padding: 8px 15px;
+  font-weight: bold;
+  background-color: var(--blue);
+  border: 1 px solid var(--blue);
+  color: white;
+  border-radius: 5px;
+}
+
+#push-tweet:disabled {
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+@media only screen and (min-width: 600px) {
+  .container {
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width: 768) {
+  .container {
+    width: 75%;
+  }
+}
+
+@media only screen and (min-width: 992) {
+  .container {
+    width: 80%;
+  }
+}
+
+
+@media only screen and (min-width: 1200px) {
+  .container {
+    width: 85%;
+  }
+}

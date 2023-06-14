@@ -10,12 +10,24 @@
 <body>
   <div class="container">
     <h1>Tweet #tag funtion</h1>
+  </div>
+
+  <div class="container">
     <div class="info">
       <p><strong>Guide!</strong> <br> Start writing your tweet, and when you type the # character, a dropdown will open with all the existing tweets, and the more you write, the more precise the auto-suggestion becomes. As soon as you find your tweet, click on it and it will be included. 
         The new tweets are grey while the existing ones are blue.</p>
     </div>
+  </div>
+
+  <div class="container">
     <div id="tweetInput" class="placeholder" contenteditable="true"></div>
+    <button id="push-tweet">Publish</button>
     <div id="suggestions"></div>
+  </div>
+  
+  <div class="container">
+    <h2>Published tweets</h2>
+    <div id="tweet-destination"></div>
   </div>
 </body>
 

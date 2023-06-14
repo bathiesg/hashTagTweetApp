@@ -35,15 +35,38 @@ const existingHashtags = [
 const entredHashes = []
 const tweetInput = document.getElementById('tweetInput');
 const suggestionsContainer = document.getElementById('suggestions');
+const tweetButton = document.getElementById('push-tweet');
+const tweetDestination = document.getElementById('tweet-destination');
 const hashtagRegex = /#[a-zA-Z0-9]{1,}/gm;
 
 
 function togglePLaceholderClass() {
   if (tweetInput.textContent.trim() === '') {
     tweetInput.classList.add('placeholder');
+    tweetButton.disabled = true
   } else {
     tweetInput.classList.remove('placeholder');
+    tweetButton.disabled = false
   }
+}
+
+function togglePublishedTweetsClass() {
+  console.log(tweetDestination.querySelector('.tweet-item'));
+  if (tweetDestination.querySelector('.tweet-item')  === null) {
+    tweetDestination.classList.add('no-published-tweet');
+  } else {
+    tweetDestination.classList.remove('no-published-tweet');
+  }
+}
+
+function fillPublishedTweets() {
+  const content = tweetInput.innerHTML;
+  const tweetDiv = document.createElement('div');
+
+  tweetDiv.classList.add('tweet-item');
+  tweetDiv.innerHTML = content;
+  tweetDestination.appendChild(tweetDiv)
+  tweetInput.innerHTML = ''
 }
 
 function handleKeyUp(event) {  
@@ -105,7 +128,6 @@ function insertSuggestion(tag) {
 }
 
 
-
 function moveCursorToEnd(element) {
   element.focus()
   window.getSelection().selectAllChildren(element)
@@ -127,4 +149,7 @@ function canShowSuggestions(str) {
 //Main
 tweetInput.addEventListener('input', togglePLaceholderClass); 
 togglePLaceholderClass();  
+togglePublishedTweetsClass()
+tweetDestination.addEventListener('DOMSubtreeModified', togglePublishedTweetsClass, false);
+tweetButton.addEventListener('click', fillPublishedTweets);
 tweetInput.addEventListener('keyup', handleKeyUp);
