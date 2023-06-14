@@ -130,26 +130,26 @@ body {
 }
 
 @media only screen and (min-width: 600px) {
-  .container {
+  body{
     width: 70%;
   }
 }
 
 @media only screen and (min-width: 768) {
-  .container {
+  body{
     width: 75%;
   }
 }
 
 @media only screen and (min-width: 992) {
-  .container {
+  body{
     width: 80%;
   }
 }
 
 
 @media only screen and (min-width: 1200px) {
-  .container {
-    width: 85%;
+  body{
+    width: 40%;
   }
 }
