@@ -65,7 +65,7 @@ function fillPublishedTweets() {
 
   tweetDiv.classList.add('tweet-item');
   tweetDiv.innerHTML = content;
-  tweetDestination.appendChild(tweetDiv)
+  tweetDestination.insertBefore(tweetDiv, tweetDestination.firstChild)
   tweetInput.innerHTML = ''
   togglePLaceholderClass();
 }
