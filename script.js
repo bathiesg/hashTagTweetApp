@@ -82,7 +82,7 @@ function handleKeyUp(event) {
     hideSuggestions()      
   }else if (lastChar === '#' && canShowSuggestions(prefix)) {
     showSuggestions(existingHashtags);
-  } else if (hasMatches) {
+  } else if (hasMatches && isSpaceCharBeforeHash(prefix)) {
     const lastHashtag = prefix.match(hashtagRegex).slice(-1)[0];
     const hashText = lastHashtag.substring(1)
     const matchedHashtags = getMatchedHashtags(hashText);
@@ -135,15 +135,15 @@ function moveCursorToEnd(element) {
   window.getSelection().collapseToEnd()
 }
 
-function canShowSuggestions(str) {
+function isSpaceCharBeforeHash(str){
   const lastHashIndex = str.lastIndexOf('#');
-  if (lastHashIndex === 0) {
-      return true;
-  } else if (str.substring(lastHashIndex - 1, lastHashIndex) === ' ') {
-      return true
-  } else {
-      return false
-  }
+  const beforeLastHashChar = str.charAt(lastHashIndex -1)
+  return beforeLastHashChar === ' ' || beforeLastHashChar === ';'
+}
+
+function canShowSuggestions(str) { 
+  const lastHashIndex = str.lastIndexOf('#');
+  return lastHashIndex === 0 || isSpaceCharBeforeHash(str)
 }
 
 

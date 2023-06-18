@@ -84,8 +84,8 @@ body {
 }
 
 
-.container:has(#tweet-destination) {
-  margin-top: 20px;
+.container:last-of-type {
+  margin-top: 50px;
 }
 
 #tweet-destination {
